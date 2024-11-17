@@ -2,49 +2,64 @@ import pandas as pd
 import torch
 from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
+import numpy as np
+import json 
 
-# Load pre-trained Sentence-BERT model
+# load the ai model
 model = SentenceTransformer('all-MiniLM-L6-v2')
 
-# Load CSV containing hashtags, followers, and descriptions
-df = pd.read_csv('db.csv')
+# load the csv containing the hashtags 
+df = pd.read_csv('db.csv', usecols=['hashtag', 'followers', "embedding"])
 
-# Example post description
-post_description = "Last week, the Teladoc Health Asia team took the stage at the 5th Health Innovation Congress Asia Pacific 2024 in Singapore. Myra Yu, Managing Director of Asia, joined a panel discussion with industry leaders and experts to explore the digital health ecosystem in APAC, addressing challenges unique to Asia and the region's evolving regulatory landscapes. Myra shared Teladoc Health’s vision for the APAC ecosystem, underscoring our strategies for harnessing digital health ecosystems to improve service delivery and elevate customer engagement. She also highlighted Teladoc Health's role in enhancing members' healthcare experiences at every stage of life. We extend our gratitude to the 5th Health Innovation Congress for providing an invaluable platform for dialogue between healthcare and technology leaders."
+# input
+post_description = "Food sorting automation is not easy if you’re working with products sourced from Mother Nature like peaches; traditional machine vision just cannot handle nature’s variety. That’s why QING | Forward Engineering integrated Robovision’s Vision AI Platform into their newest machine. This vision AI-powered system: Automates quality control on a conveyor belt Sorts peaches at 1,000 pieces per minute Works with superhuman precision. The application was trained to qualify and sort the peaches for abnormalities, such as bruises or kernels. The end customers' operators can now use and retrain it on their own. Want to know more about Vision AI in food processing?"
 
-# Get the embedding for the post description
+# get the embeddings for the input
 post_embedding = model.encode(post_description)
 
-# Generate embeddings for all hashtags with descriptions
+# if 'embedding' in df.columns:
+#     df['embedding'] = None
+
+# generate/use the embeddings of the hashtags
 hashtag_embeddings = []
-for _, row in df.iterrows():
-    # Concatenate the hashtag with its description
+added = 0
 
-    # hashtag_with_desc = f"{row['hashtag']} {row['description']}"
-    hashtag_with_desc = f"{row['hashtag']}"
-    hashtag_embedding = model.encode(hashtag_with_desc)
-    hashtag_embeddings.append(hashtag_embedding)
+for index, row in df.iterrows():
 
-# Compute cosine similarity between the post description and each hashtag
+    if pd.notna(row['embedding']):
+        # load the hashtag embedding from csv
+        embedding = json.loads(row['embedding'])
+    else:
+        # calculate and store the hashtag embedding
+        hashtag = f"{row['hashtag']}"  
+        embedding_array = model.encode(hashtag)  
+        embedding = embedding_array.tolist()  
+        df.at[index, 'embedding'] = json.dumps(embedding)
+        added += 1
+
+    hashtag_embeddings.append(embedding)
+
+# check if there is some new embedding to save
+if added > 0:
+    df.to_csv('db.csv', index=False)
+
+# compute cosine similarity between the input and each hashtag
 similarities = cosine_similarity([post_embedding], hashtag_embeddings)[0]
 
-# Add similarity scores to the dataframe
+# save similarity scores
 df['similarity'] = similarities
 
-# Normalize follower count (e.g., by dividing by the maximum follower count)
-df['normalized_followers'] = df['followers'] / df['followers'].max()
-
-# Combine similarity and follower count into a final score (weighed by similarity and followers)
+# calculate the score
 df['score'] = df['similarity'] * 1 + df['normalized_followers'] * 0
 
-# Sort the hashtags based on the combined score
+# sort hashtags for score
 df_sorted = df.sort_values(by='score', ascending=False)
 
-# Set the option to display all rows
+# set the option to display all rows
 pd.set_option('display.max_rows', None)
 
+# filter hashtag for score
 filtered_df = df_sorted[df_sorted['score'] > 0.15]
 
-# Display best fitting hashtags
-# print(filtered_df[['hashtag', 'followers', 'similarity', 'score']])
+# display input
 print(filtered_df[['hashtag', 'followers', 'similarity', 'score']].head(8))
