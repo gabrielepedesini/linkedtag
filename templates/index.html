@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hashtag Recommender</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 2em; }
+        .container { max-width: 600px; margin: auto; }
+        textarea, input[type="submit"] { width: 100%; margin-top: 1em; padding: 0.5em; }
+        table { width: 100%; border-collapse: collapse; margin-top: 2em; }
+        th, td { border: 1px solid #ccc; padding: 0.5em; text-align: left; }
+        th { background-color: #f4f4f4; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Hashtag Recommender</h1>
+        <form id="description-form">
+            <label for="description">Post Description:</label>
+            <textarea id="description" name="description" rows="5"></textarea>
+            <input type="submit" value="Find Hashtags">
+        </form>
+
+        <table id="results-table" style="display: none;">
+            <thead>
+                <tr>
+                    <th>Hashtag</th>
+                    <th>Followers</th>
+                    <th>Affinity</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <script>
+        document.getElementById('description-form').addEventListener('submit', () => {
+            event.preventDefault();
+
+            const description = document.getElementById('description').value;
+
+            cleanDescription = description.replace(/(\r\n|\n|\r)/gm, ' ');
+            cleanDescription = cleanDescription.replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, '');
+
+            console.log(cleanDescription)
+            console.log(description)
+
+            fetch('/generate-hashtags', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: `description=${cleanDescription}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                const table = document.getElementById('results-table');
+                const tbody = table.querySelector('tbody');
+                tbody.innerHTML = '';
+
+                if (data.length > 0) {
+                    table.style.display = 'table';
+
+                    data.forEach(row => {
+                        const tr = document.createElement('tr');
+                        tr.innerHTML = `
+                            <td>${'#' + row.hashtag}</td>
+                            <td>${row.followers}</td>
+                            <td>${(row.score * 100).toFixed(1) + '%'}</td>
+                        `;
+                        tbody.appendChild(tr);
+                    });
+                } else {
+                    table.style.display = 'none';
+                    alert('No matching hashtags found!');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
