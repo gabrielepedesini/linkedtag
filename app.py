@@ -68,7 +68,7 @@ def process():
     df_sorted = df.sort_values(by='score', ascending=False)
 
     # filter hashtag for score
-    filtered_df = df_sorted[df_sorted['score'] > 0.15]
+    filtered_df = df_sorted[df_sorted['score'] > 0.20]
 
     # display output
     # print(filtered_df[['hashtag', 'followers', 'similarity', 'score']].head(8))
