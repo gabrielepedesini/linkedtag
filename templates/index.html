@@ -17,7 +17,7 @@
     <div class="container">
         <h1>Hashtag Recommender</h1>
         <form id="post-form">
-            <label for="title">Post Title</label>
+            <label for="title">Post Title (Optional)</label>
             <textarea id="title" name="title" rows="1" maxlength="255"></textarea>
             <label for="content">Post Content</label>
             <textarea id="content" name="content" rows="6" maxlength="2500" required></textarea>
@@ -45,6 +45,8 @@
 
             cleanTitle = title.normalize('NFKD').replace(/(\r\n|\n|\r)/gm, ' ').replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, '');
             cleanContent = content.normalize('NFKD').replace(/(\r\n|\n|\r)/gm, ' ').replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, '');
+
+            console.log(cleanContent)
 
             fetch('/generate-hashtags', {
                 method: 'POST',

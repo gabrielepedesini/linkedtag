@@ -21,6 +21,12 @@ df = pd.read_csv('db.csv', usecols=['hashtag', 'followers', 'description', 'embe
 def home():
     return render_template('index.html')
 
+# contact page
+@app.route('/contact')
+
+def contact():
+    return render_template('contact.html')
+
 # process to generate the hashtags
 @app.route('/generate-hashtags', methods=['POST'])
 
@@ -70,10 +76,15 @@ def process():
     # sort hashtags for score
     df_sorted = df.sort_values(by='score', ascending=False)
 
-    # filter hashtags for score (based only on content)
-    filtered_df = df_sorted[df_sorted['score'] > 0.20]
+    
+    if post_title:
+        # filter hashtags for score (based also on title)
+        filtered_df = df_sorted[df_sorted['score'] > 0.10]
+    else:
+        # filter hashtags for score (based only on content)
+        filtered_df = df_sorted[df_sorted['score'] > 0.20]
 
-    # filter again the hashtags for similarity to title
+    # filter again the hashtags for similarity to title (if given)
     if post_title:
         hashtag_embeddings_filtered = []
         
