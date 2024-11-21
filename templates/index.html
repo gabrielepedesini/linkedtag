@@ -16,9 +16,11 @@
 <body>
     <div class="container">
         <h1>Hashtag Recommender</h1>
-        <form id="description-form">
-            <label for="description">Post Description:</label>
-            <textarea id="description" name="description" rows="5"></textarea>
+        <form id="post-form">
+            <label for="title">Post Title</label>
+            <textarea id="title" name="title" rows="1" maxlength="255"></textarea>
+            <label for="content">Post Content</label>
+            <textarea id="content" name="content" rows="6" maxlength="2500" required></textarea>
             <input type="submit" value="Find Hashtags">
         </form>
 
@@ -35,21 +37,19 @@
     </div>
 
     <script>
-        document.getElementById('description-form').addEventListener('submit', () => {
+        document.getElementById('post-form').addEventListener('submit', () => {
             event.preventDefault();
 
-            const description = document.getElementById('description').value;
+            const title = document.getElementById('title').value;
+            const content = document.getElementById('content').value;
 
-            cleanDescription = description.replace(/(\r\n|\n|\r)/gm, ' ');
-            cleanDescription = cleanDescription.replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, '');
-
-            console.log(cleanDescription)
-            console.log(description)
+            cleanTitle = title.normalize('NFKD').replace(/(\r\n|\n|\r)/gm, ' ').replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, '');
+            cleanContent = content.normalize('NFKD').replace(/(\r\n|\n|\r)/gm, ' ').replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, '');
 
             fetch('/generate-hashtags', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: `description=${cleanDescription}`
+                body: `title=${cleanTitle}&content=${cleanContent}`
             })
             .then(response => response.json())
             .then(data => {

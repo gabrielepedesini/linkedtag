@@ -13,7 +13,7 @@ app = Flask(__name__)
 model = SentenceTransformer('all-MiniLM-L6-v2')
 
 # load the csv containing the hashtags 
-df = pd.read_csv('db.csv', usecols=['hashtag', 'followers', "embedding"])
+df = pd.read_csv('db.csv', usecols=['hashtag', 'followers', 'description', 'embedding'])
 
 # home page
 @app.route('/')
@@ -27,10 +27,13 @@ def home():
 def process():
 
     # input
-    post_description = request.form['description']
+    post_title = request.form['title']
+    post_content = request.form['content']
 
     # get the embeddings for the input
-    post_embedding = model.encode(post_description)
+    if post_title:
+         title_embedding = model.encode(post_title)
+    content_embedding = model.encode(post_content)
 
     # generate/use the embeddings of the hashtags
     hashtag_embeddings = []
@@ -43,7 +46,7 @@ def process():
             embedding = json.loads(row['embedding'])
         else:
             # calculate and store the hashtag embedding
-            hashtag = f"{row['hashtag']}"  
+            hashtag = f"{row['description']}"  
             embedding_array = model.encode(hashtag)  
             embedding = embedding_array.tolist()  
             df.at[index, 'embedding'] = json.dumps(embedding)
@@ -55,8 +58,8 @@ def process():
     if added > 0:
         df.to_csv('db.csv', index=False)
 
-    # compute cosine similarity between the input and each hashtag
-    similarities = cosine_similarity([post_embedding], hashtag_embeddings)[0]
+    # compute cosine similarity between the content and each hashtag
+    similarities = cosine_similarity([content_embedding], hashtag_embeddings)[0]
 
     # save similarity scores
     df['similarity'] = similarities
@@ -67,11 +70,19 @@ def process():
     # sort hashtags for score
     df_sorted = df.sort_values(by='score', ascending=False)
 
-    # filter hashtag for score
+    # filter hashtags for score (based only on content)
     filtered_df = df_sorted[df_sorted['score'] > 0.20]
 
-    # display output
-    # print(filtered_df[['hashtag', 'followers', 'similarity', 'score']].head(8))
+    # filter again the hashtags for similarity to title
+    if post_title:
+        hashtag_embeddings_filtered = []
+        
+        for index, row in filtered_df.iterrows():
+            embedding = json.loads(row['embedding'])
+            hashtag_embeddings_filtered.append(embedding) 
+
+        title_similarities = cosine_similarity([title_embedding], hashtag_embeddings_filtered)[0]
+        filtered_df = filtered_df[title_similarities > 0.20]
 
     # get top results
     top_results = filtered_df[['hashtag', 'followers', 'score']].head(10).to_dict(orient='records')
