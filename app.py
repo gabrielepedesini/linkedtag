@@ -78,10 +78,10 @@ def process():
 
     
     if post_title:
-        # filter hashtags for score (based also on title)
+        # filter hashtags for score (to filter again trough title similarity)
         filtered_df = df_sorted[df_sorted['score'] > 0.10]
     else:
-        # filter hashtags for score (based only on content)
+        # filter hashtags for score (final results)
         filtered_df = df_sorted[df_sorted['score'] > 0.20]
 
     # filter again the hashtags for similarity to title (if given)
