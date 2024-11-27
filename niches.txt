@@ -34,8 +34,6 @@ Healthcare
     Telemedicine
     Pharmaceuticals
 
---------------------------
-
 Education and Learning
 
 Human Resources and Recruitment
@@ -49,6 +47,8 @@ Sales and Business Development
     B2B Sales
     Negotiation
     Account Management
+
+--------------------------
 
 Leadership and Management
     Leadership Development
@@ -67,6 +67,8 @@ Legal and Compliance
 Manufacturing and Industry
 
 Real Estate
+
+Architecture
 
 Arts and Creative Industries
     Graphic Design
