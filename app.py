@@ -76,7 +76,6 @@ def process():
     # sort hashtags for score
     df_sorted = df.sort_values(by='score', ascending=False)
 
-    
     if post_title:
         # filter hashtags for score (to filter again trough title similarity)
         filtered_df = df_sorted[df_sorted['score'] > 0.10]

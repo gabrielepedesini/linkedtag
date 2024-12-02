@@ -68,8 +68,6 @@ Real Estate
 
 Architecture
 
---------------------------
-
 Arts and Creative Industries
     Graphic Design
     Photography
@@ -92,6 +90,8 @@ Agriculture and Food Industry
     AgriTech
     Sustainable Farming
     Food Production
+
+--------------------------
 
 Automotive and Transportation
     Electric Vehicles
