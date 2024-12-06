@@ -1,15 +1,19 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
     font-family: Arial, sans-serif;
     margin: 2em;
-    background-color: #121212; /* Dark background */
-    color: #ffffff; /* Light text color */
+    background-color: #121212;
+    color: #ffffff;
 }
 
 .container {
     max-width: 600px;
     margin: auto;
     padding: 10px;
-    border-radius: 8px; /* Smooth edges */
+    border-radius: 8px; 
 }
 
 form {
@@ -26,12 +30,13 @@ form div {
 
 textarea, input[type="submit"] {
     width: 100%;
-    margin-top: 1em;
+    margin-top: 10px;
     padding: 0.5em;
-    background-color: #2b2b2b; /* Input field background */
-    color: #ffffff; /* Input field text */
-    border: 1px solid #555; /* Subtle border */
-    border-radius: 4px; /* Smooth edges */
+    background-color: #2b2b2b;
+    color: #ffffff; 
+    border: 1px solid #555; 
+    border-radius: 4px; 
+    resize: vertical;
 }
 
 input[type="submit"] {
@@ -39,33 +44,53 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-    background-color: #444; /* Highlight effect on hover */
+    background-color: #444; 
     cursor: pointer;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 5em;
-    background-color: #1e1e1e; /* Table background */
-    color: #ffffff; /* Table text */
+    margin-top: 6em;
+    background-color: #1e1e1e;
+    color: #ffffff; 
+    border-radius: 4px;
+    overflow: hidden;
 }
 
 th, td {
-    border: 1px solid #333; /* Darker border for table cells */
     padding: 0.5em;
     text-align: left;
+    width: fit-content;
 }
 
 th {
-    background-color: #333333; /* Header background */
-    color: #ffffff; /* Header text */
+    background-color: #4e4e4e; 
+    color: #ffffff;
 }
 
 td {
-    background-color: #1e1e1e; /* Alternating row background */
+    background-color: #1e1e1e;
 }
 
 tr:nth-child(even) td {
-    background-color: #2b2b2b; /* Slightly different shade for alternating rows */
+    background-color: #2b2b2b; 
+}
+
+table td:nth-child(1), table th:nth-child(1) {
+    width: 20px;
+}
+
+.copy {
+    display: flex;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.copy input {
+    margin: 0;
+}
+
+.copy div {
+    margin-left: 10px;
 }

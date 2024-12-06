@@ -17,7 +17,7 @@
             </div>
             <div>
                 <label for="content">Post Content</label>
-                <textarea id="content" name="content" rows="10" maxlength="2500" required></textarea>
+                <textarea id="content" name="content" rows="12" maxlength="2500" required></textarea>
             </div>
             <input type="submit" value="Find Hashtags">
         </form>
@@ -25,6 +25,7 @@
         <table id="results-table" style="display: none;">
             <thead>
                 <tr>
+                    <th></th>
                     <th>Hashtag</th>
                     <th>Followers</th>
                     <th>Affinity</th>
@@ -32,6 +33,11 @@
             </thead>
             <tbody></tbody>
         </table>
+
+        <div class="copy">
+            <input type="submit" value="Copy Selected Hashtags" id="copy-btn" style="display: none;">
+            <div id="copy-output" style="display: none;"></div>
+        </div>
     </div>
 
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
