@@ -31,7 +31,7 @@ document.getElementById('post-form').addEventListener('submit', () => {
                 tr.innerHTML = `
                     <td><input type="checkbox" value="${'#' + row.hashtag}" checked></td>
                     <td>${'#' + row.hashtag}</td>
-                    <td>${row.followers}</td>
+                    <td>${row.followers.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}</td>
                     <td>${(row.score * 100).toFixed(1) + '%'}</td>
                 `;
                 tbody.appendChild(tr);
