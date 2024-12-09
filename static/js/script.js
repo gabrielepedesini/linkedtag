@@ -1,3 +1,31 @@
+//calculate numbers of chars in text areas
+const textAreas = document.querySelectorAll('textarea');
+
+window.addEventListener('load', () => {
+    textAreas.forEach((element) => {
+
+        let id = element.id;
+        const counter = document.getElementById('counter-' + id);
+        let charCount = element.value.length.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        let maxLength = element.maxLength.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    
+        counter.textContent = charCount + ' / ' + maxLength;
+    });
+})
+
+textAreas.forEach((element) => {
+    element.addEventListener('input', (el) => {
+      
+        let id = el.target.id;
+        const counter = document.getElementById('counter-' + id);
+        let charCount = el.target.value.length.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        let maxLength = el.target.maxLength.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+        counter.textContent = charCount + ' / ' + maxLength;
+
+    });
+});
+
 //retrieve hashtags function
 document.getElementById('post-form').addEventListener('submit', () => {
     event.preventDefault();
@@ -31,7 +59,7 @@ document.getElementById('post-form').addEventListener('submit', () => {
                 tr.innerHTML = `
                     <td><input type="checkbox" value="${'#' + row.hashtag}" checked></td>
                     <td>${'#' + row.hashtag}</td>
-                    <td>${row.followers.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}</td>
+                    <td>${row.followers.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</td>
                     <td>${(row.score * 100).toFixed(1) + '%'}</td>
                 `;
                 tbody.appendChild(tr);

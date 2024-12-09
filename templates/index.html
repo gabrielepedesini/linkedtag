@@ -5,23 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LinkedTag</title>
 
+    <!-- INCONS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+
+    <!-- STYLE -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
+    <div class="container title">
+        <h1>Linked<span>Tag</span></h1>
+        <h3>Boost your LinkedIn posts reach with top performing hashtags</h3>
+    </div>
+    
     <div class="container">
-        <h1>LinkedTag</h1>
         <form id="post-form">
-            <div>
-                <label for="title">Post Title (Optional)</label>
-                <textarea id="title" name="title" rows="1" maxlength="255"></textarea>
+            <div class="input">
+                <label for="title">Post Title <span>(Optional)</span></label>
+                <textarea id="title" name="title" rows="1" maxlength="255" placeholder="Insert a short title/summary for a more accurate suggestion"></textarea>
+                <div class="char-counter" id="counter-title"></div>
             </div>
-            <div>
+            <div class="input">
                 <label for="content">Post Content</label>
-                <textarea id="content" name="content" rows="12" maxlength="2500" required></textarea>
+                <textarea id="content" name="content" rows="12" maxlength="2500" placeholder="Insert post's content: in general, the longer it is, the more accurate the suggestion" required></textarea>
+                <div class="char-counter" id="counter-content"></div>
             </div>
-            <input type="submit" value="Find Hashtags">
+            <button type="submit"><i class="ti ti-search"></i> Find Hashtags</button>
         </form>
+    </div>
 
+    <div class="container">
         <table id="results-table" style="display: none;">
             <thead>
                 <tr>
@@ -41,5 +53,6 @@
     </div>
 
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
 </body>
 </html>
