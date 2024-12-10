@@ -1,7 +1,7 @@
 // gets the preferred theme
 function getPreferredTheme() {
     if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        return 'dark';
+        return 'light';
     } else {
         return 'light';
     }

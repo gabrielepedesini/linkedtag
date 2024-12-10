@@ -46,9 +46,7 @@ document.getElementById('post-form').addEventListener('submit', () => {
         const table = document.getElementById('results-table');
         const tbody = table.querySelector('tbody');
         const copyBtn = document.getElementById('copy-btn');
-        const copyOut = document.getElementById('copy-output');
         tbody.innerHTML = '';
-        copyOut.innerText = '';
 
         if (data.length > 0) {
             table.style.display = 'table';
@@ -73,7 +71,6 @@ document.getElementById('post-form').addEventListener('submit', () => {
 
 //copy selected hashtags to clipboard
 const copyBtn = document.getElementById('copy-btn');
-const copyOut = document.getElementById('copy-output');
 
 copyBtn.addEventListener('click', () => {
     const hashtags = document.querySelectorAll('input[type="checkbox"]:checked');
@@ -84,14 +81,26 @@ copyBtn.addEventListener('click', () => {
         buffer += el.value + " ";
     })
 
-    copyOut.style.display = 'block';
-
     //copy to clipboard
     navigator.clipboard.writeText(buffer)
         .then(() => {
-            copyOut.innerText = 'Copied!'
+            copyBtn.innerHTML = '<i class="ti ti-check"></i> Copied!';
+
+            copyBtn.classList.add('correct');
+
+            setTimeout(() => {
+                copyBtn.classList.remove('correct');
+                copyBtn.innerHTML = '<i class="ti ti-copy"></i> Copy Selected Hashtags';
+            }, 3000);
         })
         .catch(err => {
-            copyOut.innerText = 'Error!'
+            copyBtn.innerHTML = '<i class="ti ti-x"></i> Error!';
+
+            copyBtn.classList.add('error');
+
+            setTimeout(() => {
+                copyBtn.classList.remove('error');
+                copyBtn.innerHTML = '<i class="ti ti-copy"></i> Copy Selected Hashtags';
+            }, 3000);
         });
 })

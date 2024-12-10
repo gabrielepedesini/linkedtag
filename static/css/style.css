@@ -79,10 +79,86 @@ a:hover {
     transition: 0.3s opacity;
 }
 
+button {
+    width: fit-content;
+    background-color: var(--accent);
+    color: #f5f7f9;
+    font-weight: 500;
+    font-size: 14px;
+    padding: 12px 24px;
+    border-radius: 5px; 
+    margin: 0 auto;
+    border: 1px solid var(--accent);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: var(--accent-alt); 
+    transition: 0.3s;
+}
+
+button.alt {
+    width: fit-content;
+    background-color: #999999;
+    color: #f5f7f9;
+    font-weight: 500;
+    font-size: 14px;
+    padding: 12px 24px;
+    border-radius: 5px; 
+    margin: 0 auto;
+    border: 1px solid #999999;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button.alt:hover {
+    background-color: #888888; 
+    transition: 0.3s;
+}
+
+button.correct {
+    width: fit-content;
+    background-color: #29903b;
+    color: #f5f7f9;
+    font-weight: 500;
+    font-size: 14px;
+    padding: 12px 24px;
+    border-radius: 5px; 
+    margin: 0 auto;
+    border: 1px solid #29903b;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button.correct:hover {
+    background-color: #2ba33f; 
+    transition: 0.3s;
+}
+
+button.error {
+    width: fit-content;
+    background-color: #fa5e55;
+    color: #f5f7f9;
+    font-weight: 500;
+    font-size: 14px;
+    padding: 12px 24px;
+    border-radius: 5px; 
+    margin: 0 auto;
+    border: 1px solid #fa5e55;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button.error:hover {
+    background-color: #ca4a43; 
+    transition: 0.3s;
+}
+
 :root[data-theme="light"] {
     --text: #06080a;
     --background: #fcfcfc;
-    --alt-background: #e0e0e0;
+    --alt-background: #e6e6e6;
     --primary: #4273c7;
     --secondary: #84a8e7;
     --accent: #0b66c3;
@@ -214,25 +290,6 @@ textarea {
     resize: vertical;
     font-family: 'Source Code Pro', sans-serif;
     font-size: 14px;
-}
-
-button {
-    width: fit-content;
-    background-color: var(--accent);
-    color: #f5f7f9;
-    font-weight: 500;
-    font-size: 14px;
-    padding: 12px 24px;
-    border-radius: 5px; 
-    margin: 0 auto;
-    border: 1px solid var(--accent);
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-button:hover {
-    background-color: var(--accent-alt); 
-    transition: 0.3s;
 }
 
 table {
