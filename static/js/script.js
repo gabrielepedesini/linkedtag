@@ -43,12 +43,14 @@ document.getElementById('post-form').addEventListener('submit', () => {
     })
     .then(response => response.json())
     .then(data => {
+        const tableWrapper = document.getElementById('table-wrapper'); 
         const table = document.getElementById('results-table');
         const tbody = table.querySelector('tbody');
         const copyBtn = document.getElementById('copy-btn');
         tbody.innerHTML = '';
 
         if (data.length > 0) {
+            tableWrapper.style.display = 'block';
             table.style.display = 'table';
             copyBtn.style.display = 'block';
 
@@ -63,7 +65,9 @@ document.getElementById('post-form').addEventListener('submit', () => {
                 tbody.appendChild(tr);
             });
         } else {
+            tableWrapper.style.display = 'none';
             table.style.display = 'none';
+            copyBtn.style.display = 'none';
             alert('No matching hashtags found!');
         }
     });

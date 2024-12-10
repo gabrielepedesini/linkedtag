@@ -19,37 +19,39 @@
     
     <div class="container">
         <form id="post-form">
-            <div class="input">
-                <label for="title">Post Title <span>(Optional)</span></label>
-                <textarea id="title" name="title" rows="1" maxlength="255" placeholder="Insert a short title/summary for a more accurate suggestion"></textarea>
-                <div class="char-counter" id="counter-title"></div>
+            <div class="input-wrapper">
+                <div class="input">
+                    <label for="title">Post Title <span>(Optional)</span></label>
+                    <textarea id="title" name="title" rows="1" maxlength="255" placeholder="Insert a short title/summary for a more accurate suggestion"></textarea>
+                    <div class="char-counter" id="counter-title"></div>
+                </div>
+                <div class="input">
+                    <label for="content">Post Content</label>
+                    <textarea id="content" name="content" rows="12" maxlength="2500" placeholder="Insert post's content: in general, the longer it is, the more accurate the suggestion" required></textarea>
+                    <div class="char-counter" id="counter-content"></div>
+                </div>
             </div>
-            <div class="input">
-                <label for="content">Post Content</label>
-                <textarea id="content" name="content" rows="12" maxlength="2500" placeholder="Insert post's content: in general, the longer it is, the more accurate the suggestion" required></textarea>
-                <div class="char-counter" id="counter-content"></div>
-            </div>
+
             <button type="submit"><i class="ti ti-search"></i> Find Hashtags</button>
         </form>
     </div>
 
     <div class="container">
-        <table id="results-table" style="display: none;">
-            <thead>
-                <tr>
-                    <th></th>
-                    <th>Hashtag</th>
-                    <th>Followers</th>
-                    <th>Affinity</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
-
-        <div class="copy">
-            <button type="submit" class="alt" id="copy-btn" style="display: none;"><i class="ti ti-copy"></i> Copy Selected Hashtags</button>
-            <div id="copy-output" style="display: none;"></div>
+        <div class="table-wrapper" id="table-wrapper" style="display: none;">
+            <table id="results-table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Hashtag</th>
+                        <th>Followers</th>
+                        <th>Affinity</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>        
         </div>
+        
+        <button type="submit" class="alt" id="copy-btn" style="display: none;"><i class="ti ti-copy"></i> Copy Selected Hashtags</button>
     </div>
 
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
