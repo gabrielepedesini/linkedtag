@@ -26,6 +26,34 @@ textAreas.forEach((element) => {
     });
 });
 
+//error if form is invalid
+const form = document.getElementById('post-form');
+const textArea = document.getElementById("content");
+const formBtn = document.querySelector("button[type='submit']");
+
+formBtn.addEventListener("click", () => {
+    if (textArea.value.length == 0) {
+        form.classList.add("submitted");
+    }
+});
+
+//number of rows adjustments
+form.addEventListener("input", () => {
+    form.classList.remove("submitted");
+});
+
+function adjustTextareaRows() {
+    const textarea = document.getElementById("title");
+    if (window.innerWidth < 600) {
+        textarea.setAttribute("rows", "2");
+    } else {
+        textarea.setAttribute("rows", "1");
+    }
+}
+
+window.addEventListener("resize", adjustTextareaRows);
+window.addEventListener("DOMContentLoaded", adjustTextareaRows);
+
 //retrieve hashtags function
 document.getElementById('post-form').addEventListener('submit', () => {
     event.preventDefault();
@@ -43,6 +71,10 @@ document.getElementById('post-form').addEventListener('submit', () => {
     })
     .then(response => response.json())
     .then(data => {
+        const sectionHero = document.querySelector('section.hero');
+        const sectionTable = document.querySelector('section.table');
+        const shapeDiv = document.querySelector('.custom-shape-divider');
+        const tableContainer = document.querySelector('.container.table');
         const tableWrapper = document.getElementById('table-wrapper'); 
         const table = document.getElementById('results-table');
         const tbody = table.querySelector('tbody');
@@ -50,9 +82,6 @@ document.getElementById('post-form').addEventListener('submit', () => {
         tbody.innerHTML = '';
 
         if (data.length > 0) {
-            tableWrapper.style.display = 'block';
-            table.style.display = 'table';
-            copyBtn.style.display = 'block';
 
             data.forEach(row => {
                 const tr = document.createElement('tr');
@@ -64,11 +93,33 @@ document.getElementById('post-form').addEventListener('submit', () => {
                 `;
                 tbody.appendChild(tr);
             });
+
+            tableWrapper.style.display = 'block';
+            table.style.display = 'table';
+            copyBtn.style.display = 'flex';
+            tableContainer.style.display = 'block';
+            sectionHero.style.minHeight = 'calc(100vh + 300px)';
+            sectionHero.style.paddingBottom = '300px';
+            sectionTable.style.height = `${tableWrapper.offsetHeight}px`;
+            shapeDiv.style.display = 'block';
+
+            setTimeout(() => {
+                tableWrapper.scrollIntoView({ behavior: 'smooth', block: 'center' }); 
+            }, 300);
+            
+
         } else {
+
             tableWrapper.style.display = 'none';
             table.style.display = 'none';
             copyBtn.style.display = 'none';
+            sectionHero.style.minHeight = '100vh';
+            sectionHero.style.paddingBottom = '0px';
+            sectionTable.style.height = `0px`;
+            shapeDiv.style.display = 'none';
+
             alert('No matching hashtags found!');
+
         }
     });
 });
@@ -88,23 +139,23 @@ copyBtn.addEventListener('click', () => {
     //copy to clipboard
     navigator.clipboard.writeText(buffer)
         .then(() => {
-            copyBtn.innerHTML = '<i class="ti ti-check"></i> Copied!';
+            copyBtn.innerHTML = '<img src="../static/img/icons/check.svg" alt=""> Copied!';
 
             copyBtn.classList.add('correct');
 
             setTimeout(() => {
                 copyBtn.classList.remove('correct');
-                copyBtn.innerHTML = '<i class="ti ti-copy"></i> Copy Selected Hashtags';
+                copyBtn.innerHTML = '<img src="../static/img/icons/copy.svg" alt=""> Copy Selected Hashtags';
             }, 3000);
         })
         .catch(err => {
-            copyBtn.innerHTML = '<i class="ti ti-x"></i> Error!';
+            copyBtn.innerHTML = '<img src="../static/img/icons/x.svg" alt=""> Error!';
 
             copyBtn.classList.add('error');
 
             setTimeout(() => {
                 copyBtn.classList.remove('error');
-                copyBtn.innerHTML = '<i class="ti ti-copy"></i> Copy Selected Hashtags';
+                copyBtn.innerHTML = '<img src="../static/img/icons/copy.svg" alt=""> Copy Selected Hashtags';
             }, 3000);
         });
 })

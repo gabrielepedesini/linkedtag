@@ -11,8 +11,43 @@
     font-family: 'Inter', sans-serif;
 }
 
-body {
-  background-color: var(--background);
+:root[data-theme="light"] {
+    --text: #06080a;
+    --background: #fcfcfc;
+    --alt-background: #e6e6e6;
+    --primary: #2c5db3;
+    --secondary: #4c85e6;
+    --secondary-alt: #3d6ab6;
+    --accent: #0b66c3;
+    --accent-alt: #0a5199;
+
+    --table-heading: #cccccc; 
+    --table-line: #f0f0f0;    
+    --table-line-alt: #dddddd;     
+
+    --scrollbar: #e2e2e2;
+    --scrollthumb: #adadad;
+    --scrollthumb-hover: #888888;
+}
+
+:root[data-theme="dark"] {
+    --text: #f5f7f9;
+    --background: #060a0e;
+    --alt-background: #0e1318;
+    --ter-background: #0d161f;
+    --primary: #2c5db3;
+    --secondary: #113169;
+    --secondary-alt: #0e2753;
+    --accent: #0b66c3;
+    --accent-alt: #0a5199;
+
+    --table-heading: rgba(34, 45, 56, 0.2);
+    --table-line: rgba(12, 20, 27, 0.2);
+    --table-line-alt: rgba(17, 28, 37, 0.2);
+
+    --scrollbar: #e2e2e2;
+    --scrollthumb: #adadad;
+    --scrollthumb-hover: #888888;
 }
 
 h1, h2, h3, h4, h5, h6, a, button {
@@ -28,7 +63,7 @@ h3, h4, h5, h6 {
 }
 
 h1 {
-    font-size: 42px;
+    font-size: 48px;
 }
 
 h2 {
@@ -42,7 +77,7 @@ h3 {
 @media (max-width: 768px) {
     
     h1 {
-        font-size: 28px;
+        font-size: 36px;
     }
     
     h2 {
@@ -80,120 +115,62 @@ a:hover {
 }
 
 button {
-    width: fit-content;
-    background-color: var(--accent);
+    width: 250px;
     color: #f5f7f9;
     font-weight: 500;
     font-size: 14px;
     padding: 12px 24px;
-    border-radius: 5px; 
+    border-radius: 5px;
     margin: 0 auto;
-    border: 1px solid var(--accent);
+    border: 1px solid transparent;
     cursor: pointer;
-    transition: 0.3s;
+    transition: 0.5s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+button {
+    background-color: var(--accent);
+    border-color: var(--accent);
 }
 
 button:hover {
-    background-color: var(--accent-alt); 
-    transition: 0.3s;
+    background-color: var(--accent-alt);
+    transition: 0.2s;
 }
 
 button.alt {
-    width: fit-content;
-    background-color: #999999;
     background-color: var(--secondary);
-    color: #f5f7f9;
-    font-weight: 500;
-    font-size: 14px;
-    padding: 12px 24px;
-    border-radius: 5px; 
-    margin: 0 auto;
-    border: 1px solid var(--secondary);
-    cursor: pointer;
-    transition: 0.3s;
+    border-color: var(--secondary);
 }
 
 button.alt:hover {
-    background-color: var(--secondary-alt); 
-    transition: 0.3s;
+    background-color: var(--secondary-alt);
+    transition: 0.2s;
 }
 
 button.correct {
-    width: fit-content;
-    background-color: #29903b;
-    color: #f5f7f9;
-    font-weight: 500;
-    font-size: 14px;
-    padding: 12px 24px;
-    border-radius: 5px; 
-    margin: 0 auto;
-    border: 1px solid #29903b;
-    cursor: pointer;
-    transition: 0.3s;
+    background-color: #299057;
+    border-color: #299057;
     pointer-events: none;
 }
 
 button.correct:hover {
-    background-color: #2ba33f; 
-    transition: 0.3s;
+    background-color: #216e44;
+    transition: 0.2s;
 }
 
 button.error {
-    width: fit-content;
     background-color: #fa5e55;
-    color: #f5f7f9;
-    font-weight: 500;
-    font-size: 14px;
-    padding: 12px 24px;
-    border-radius: 5px; 
-    margin: 0 auto;
-    border: 1px solid #fa5e55;
-    cursor: pointer;
-    transition: 0.3s;
+    border-color: #fa5e55;
     pointer-events: none;
 }
 
 button.error:hover {
-    background-color: #ca4a43; 
-    transition: 0.3s;
-}
-
-:root[data-theme="light"] {
-    --text: #06080a;
-    --background: #fcfcfc;
-    --alt-background: #e6e6e6;
-    --primary: #2c5db3;
-    --secondary: #77a2ec;
-    --secondary-alt: #5d87cf;
-    --accent: #0b66c3;
-    --accent-alt: #0a5199;
-
-    --table-heading: #d6d6d6; 
-    --table-line: #f0f0f0;    
-    --table-line-alt: #e6e6e6;     
-
-    --scrollbar: #e2e2e2;
-    --scrollthumb: #adadad;
-    --scrollthumb-hover: #888888;
-}
-
-:root[data-theme="dark"] {
-    --text: #f5f7f9;
-    --background: #060a0e;
-    --alt-background: #0e1318;
-    --primary: #2c5db3;
-    --secondary: #113169;
-    --secondary-alt: #0e2753;
-    --accent: #0b66c3;
-    --accent-alt: #0a5199;
-
-    --table-heading: #222d38;
-    --table-line: #0c141b;
-    --table-line-alt: #111c25;
-
-    --scrollbar: #e2e2e2;
-    --scrollthumb: #adadad;
-    --scrollthumb-hover: #888888;
+    background-color: #ca4a43;
+    transition: background-color 0.2s, border-color 0.2s;
 }
 
 /* SCROLLBAR */
@@ -234,9 +211,27 @@ button.error:hover {
 
 
 .container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 50px 25px;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 50px 25px;
+}
+
+/* HERO */
+
+section.hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+[data-theme="light"] section.hero {
+    background: radial-gradient(circle, #fcfcfc 0%, #e6e6e6 100%);
+}
+
+[data-theme="dark"] section.hero {
+    background: radial-gradient(circle, rgba(14,19,24,1) 0%, rgba(6,10,14,1) 100%);
 }
 
 /* TITLE */
@@ -312,29 +307,55 @@ textarea {
     font-size: 14px;
 }
 
+form.submitted textarea:invalid {
+    border: 1px solid #fa5e55; 
+}
+
 textarea::placeholder {
     opacity: 0.4;
 }
 
+@media (max-width: 600px) {
+    form {
+        gap: 25px;
+    }
+}
+
+/* TABLE */
+
+section.table {
+    position: relative;
+    background-color: var(--ter-background);
+}
+
+.container.table {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: -300px;
+    display: none;
+}
+
 div.table-wrapper {
-    overflow: hidden;
+    position: relative;
+    overflow: auto;
     border-radius: 5px;
     border: 1px solid #919191; 
     margin-bottom: 30px;
+    z-index: 1000;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
-    background-color: #1e1e1e;
     color: var(--text);
-    overflow: hidden;
 }
 
 th, td {
     padding: 8px;
     text-align: left;
     width: fit-content;
+    backdrop-filter: blur(3px);
 }
 
 th {
@@ -353,4 +374,33 @@ tr:nth-child(even) td {
 
 table td:nth-child(1), table th:nth-child(1) {
     width: 20px;
+}
+
+.anchor {
+    position: absolute;
+    top: -150px;
+}
+
+.custom-shape-divider {
+    position: absolute;
+    top: -140px;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    transform: rotate(180deg);
+    z-index: 0;
+    display: none;
+}
+
+.custom-shape-divider svg {
+    position: relative;
+    display: block;
+    width: calc(188% + 1.3px);
+    height: 141px;
+    transform: rotateY(180deg);
+}
+
+.custom-shape-divider .shape-fill {
+    fill: var(--ter-background);
 }
