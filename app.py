@@ -81,7 +81,7 @@ def process():
 
     if post_title:
         # filter hashtags for score (to filter again trough title similarity)
-        filtered_df = df_sorted[df_sorted['score'] > 0.10]
+        filtered_df = df_sorted[df_sorted['score'] > 0.15]
     else:
         # filter hashtags for score (final results)
         filtered_df = df_sorted[df_sorted['score'] > 0.20]
@@ -95,7 +95,7 @@ def process():
             hashtag_embeddings_filtered.append(embedding) 
 
         title_similarities = cosine_similarity([title_embedding], hashtag_embeddings_filtered)[0]
-        filtered_df = filtered_df[title_similarities > 0.20]
+        filtered_df = filtered_df[title_similarities > 0.25]
 
     # get top results
     top_results = filtered_df[['hashtag', 'followers', 'score']].head(10).to_dict(orient='records')
