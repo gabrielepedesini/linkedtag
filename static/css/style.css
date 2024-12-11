@@ -45,9 +45,9 @@
     --table-line: rgba(12, 20, 27, 0.2);
     --table-line-alt: rgba(17, 28, 37, 0.2);
 
-    --scrollbar: #e2e2e2;
-    --scrollthumb: #adadad;
-    --scrollthumb-hover: #888888;
+    --scrollbar: #0d141b;
+    --scrollthumb: #141e29;
+    --scrollthumb-hover: #1c2630;
 }
 
 h1, h2, h3, h4, h5, h6, a, button {
@@ -172,6 +172,20 @@ button.error:hover {
     background-color: #ca4a43;
     transition: background-color 0.2s, border-color 0.2s;
 }
+
+button.rotate-icon img {
+    animation: rotateInfinite 3s linear infinite;
+}
+
+@keyframes rotateInfinite {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+}
+  
 
 /* SCROLLBAR */
 
@@ -332,7 +346,7 @@ section.table {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    top: -300px;
+    top: -280px;
     display: none;
 }
 

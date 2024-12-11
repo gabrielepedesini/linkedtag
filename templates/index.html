@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LinkedTag</title>
 
+    <!-- ICONS -->
+    {% for icon in icons %}
+    <link rel="preload" href="{{ url_for('static', filename=icon) }}" as="image">
+    {% endfor %}
+
     <!-- STYLE -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
@@ -49,7 +54,6 @@
 
         <div class="container table">
             <div class="table-wrapper" id="table-wrapper" style="display: none;">
-                <!-- <a class="anchor"></a> -->
 
                 <table id="results-table">
                     <thead>

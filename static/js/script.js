@@ -64,64 +64,100 @@ document.getElementById('post-form').addEventListener('submit', () => {
     cleanTitle = title.normalize('NFKD').replace(/(\r\n|\n|\r)/gm, ' ').replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, '');
     cleanContent = content.normalize('NFKD').replace(/(\r\n|\n|\r)/gm, ' ').replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, '');
 
-    fetch('/generate-hashtags', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: `title=${cleanTitle}&content=${cleanContent}`
-    })
-    .then(response => response.json())
-    .then(data => {
-        const sectionHero = document.querySelector('section.hero');
-        const sectionTable = document.querySelector('section.table');
-        const shapeDiv = document.querySelector('.custom-shape-divider');
-        const tableContainer = document.querySelector('.container.table');
-        const tableWrapper = document.getElementById('table-wrapper'); 
-        const table = document.getElementById('results-table');
-        const tbody = table.querySelector('tbody');
-        const copyBtn = document.getElementById('copy-btn');
-        tbody.innerHTML = '';
+    formBtn.innerHTML = '<img src="../static/img/icons/loader.svg" alt=""> Searching...';
+    formBtn.classList.add('rotate-icon');
+    formBtn.style.pointerEvents = 'none';
+    
+    setTimeout(() => {
+           
 
-        if (data.length > 0) {
 
-            data.forEach(row => {
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
-                    <td><input type="checkbox" value="${'#' + row.hashtag}" checked></td>
-                    <td>${'#' + row.hashtag}</td>
-                    <td>${row.followers.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</td>
-                    <td>${(row.score * 100).toFixed(1) + '%'}</td>
-                `;
-                tbody.appendChild(tr);
-            });
+        fetch('/generate-hashtags', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: `title=${cleanTitle}&content=${cleanContent}`
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error();
+            }
+            return response.json();
+        })
+        .then(data => {
+            const sectionHero = document.querySelector('section.hero');
+            const sectionTable = document.querySelector('section.table');
+            const shapeDiv = document.querySelector('.custom-shape-divider');
+            const tableContainer = document.querySelector('.container.table');
+            const tableWrapper = document.getElementById('table-wrapper'); 
+            const table = document.getElementById('results-table');
+            const tbody = table.querySelector('tbody');
+            const copyBtn = document.getElementById('copy-btn');
+            tbody.innerHTML = '';
+    
+            if (data.length > 0) {
+    
+                data.forEach(row => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td><input type="checkbox" value="${'#' + row.hashtag}" checked></td>
+                        <td>${'#' + row.hashtag}</td>
+                        <td>${row.followers.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</td>
+                        <td>${(row.score * 100).toFixed(1) + '%'}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+    
+                tableWrapper.style.display = 'block';
+                table.style.display = 'table';
+                copyBtn.style.display = 'flex';
+                tableContainer.style.display = 'block';
+                sectionHero.style.minHeight = 'calc(100vh + 300px)';
+                sectionHero.style.paddingBottom = '300px';
+                sectionTable.style.height = `${tableWrapper.offsetHeight}px`;
+                shapeDiv.style.display = 'block';
+    
+                setTimeout(() => {
+                    tableWrapper.scrollIntoView({ behavior: 'smooth', block: 'center' }); 
 
-            tableWrapper.style.display = 'block';
-            table.style.display = 'table';
-            copyBtn.style.display = 'flex';
-            tableContainer.style.display = 'block';
-            sectionHero.style.minHeight = 'calc(100vh + 300px)';
-            sectionHero.style.paddingBottom = '300px';
-            sectionTable.style.height = `${tableWrapper.offsetHeight}px`;
-            shapeDiv.style.display = 'block';
+                    formBtn.innerHTML = '<img src="../static/img/icons/search.svg" alt=""> Find Hashtags';
+                    formBtn.classList.remove('rotate-icon');
+                    formBtn.style.pointerEvents = 'all';
+                }, 200);
+    
+            } else {
+    
+                tableWrapper.style.display = 'none';
+                table.style.display = 'none';
+                copyBtn.style.display = 'none';
+                sectionHero.style.minHeight = '100vh';
+                sectionHero.style.paddingBottom = '0px';
+                sectionTable.style.height = `0px`;
+                shapeDiv.style.display = 'none';
+
+                formBtn.innerHTML = '<img src="../static/img/icons/search.svg" alt=""> Find Hashtags';
+                formBtn.classList.remove('rotate-icon');
+                formBtn.style.pointerEvents = 'all';
+    
+                alert('No matching hashtags found!');
+    
+            }
+        })
+        .catch(error => {
+            formBtn.innerHTML = '<img src="../static/img/icons/x.svg" alt=""> Error Occurred';
+            formBtn.classList.remove('rotate-icon');
+            formBtn.classList.add('error');
 
             setTimeout(() => {
-                tableWrapper.scrollIntoView({ behavior: 'smooth', block: 'center' }); 
-            }, 300);
-            
+                formBtn.innerHTML = '<img src="../static/img/icons/search.svg" alt=""> Find Hashtags';
+                formBtn.classList.remove('error');
+                formBtn.style.pointerEvents = 'all';
+            }, 3000);
+        });
 
-        } else {
 
-            tableWrapper.style.display = 'none';
-            table.style.display = 'none';
-            copyBtn.style.display = 'none';
-            sectionHero.style.minHeight = '100vh';
-            sectionHero.style.paddingBottom = '0px';
-            sectionTable.style.height = `0px`;
-            shapeDiv.style.display = 'none';
 
-            alert('No matching hashtags found!');
+    }, 3000);
 
-        }
-    });
 });
 
 //copy selected hashtags to clipboard

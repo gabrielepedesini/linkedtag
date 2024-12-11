@@ -1,4 +1,5 @@
-from flask import Flask, request, render_template, jsonify
+from flask import Flask, request, render_template, jsonify, url_for
+import os
 import pandas as pd
 import torch
 from sentence_transformers import SentenceTransformer
@@ -19,7 +20,9 @@ df = pd.read_csv('db.csv', usecols=['hashtag', 'followers', 'description', 'embe
 @app.route('/')
 
 def home():
-    return render_template('index.html')
+    icon_folder = os.path.join(app.static_folder, 'img/icons')
+    icons = [f'img/icons/{filename}' for filename in os.listdir(icon_folder) if filename.endswith(('png', 'jpg', 'svg'))]
+    return render_template('index.html', icons=icons)
 
 # contact page
 @app.route('/contact')
@@ -100,4 +103,4 @@ def process():
     return jsonify(top_results)
 
 if __name__ == '__main__':
-    app.run(host='127.0.0.1', port=5000, debug=True)
+    app.run(debug=True)
