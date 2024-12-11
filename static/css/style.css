@@ -15,15 +15,16 @@
     --text: #06080a;
     --background: #fcfcfc;
     --alt-background: #e6e6e6;
+    --ter-background: #c0d2e0;
     --primary: #2c5db3;
     --secondary: #4c85e6;
     --secondary-alt: #3d6ab6;
     --accent: #0b66c3;
     --accent-alt: #0a5199;
 
-    --table-heading: #cccccc; 
-    --table-line: #f0f0f0;    
-    --table-line-alt: #dddddd;     
+    --table-heading: rgba(204, 204, 204, 0.2); 
+    --table-line: rgba(240, 240, 240, 0.2);    
+    --table-line-alt: rgba(221, 221, 221, 0.2);     
 
     --scrollbar: #e2e2e2;
     --scrollthumb: #adadad;
@@ -124,14 +125,11 @@ button {
     margin: 0 auto;
     border: 1px solid transparent;
     cursor: pointer;
-    transition: 0.5s;
+    /* transition: 0.5s; */
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 8px;
-}
-
-button {
     background-color: var(--accent);
     border-color: var(--accent);
 }
@@ -174,7 +172,7 @@ button.error:hover {
 }
 
 button.rotate-icon img {
-    animation: rotateInfinite 3s linear infinite;
+    animation: rotateInfinite 2.5s linear infinite;
 }
 
 @keyframes rotateInfinite {
@@ -241,7 +239,7 @@ section.hero {
 }
 
 [data-theme="light"] section.hero {
-    background: radial-gradient(circle, #fcfcfc 0%, #e6e6e6 100%);
+    background: radial-gradient(circle, #fcfcfc 0%, #d3d3d3 100%);
 }
 
 [data-theme="dark"] section.hero {
