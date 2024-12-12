@@ -134,7 +134,7 @@ document.getElementById('post-form').addEventListener('submit', () => {
             formBtn.classList.remove('rotate-icon');
             formBtn.style.pointerEvents = 'all';
 
-            alert('No matching hashtags found!');
+            noHashtagFound();
 
         }
     })
@@ -150,6 +150,26 @@ document.getElementById('post-form').addEventListener('submit', () => {
         }, 3000);
     });
 });
+
+//no hashtags found 
+const popupContainer = document.querySelector('.blur-background');
+const popup = document.querySelector('.no-hashtag-container');
+const closePopupBtn = document.querySelector('.no-hashtag-container .x');
+
+function noHashtagFound() {
+    popupContainer.style.display = 'block';
+    popup.style.display = 'flex';
+}
+
+popupContainer.addEventListener('click', () => {
+    popupContainer.style.display = 'none';
+    popup.style.display = 'none';
+})
+
+closePopupBtn.addEventListener('click', () => {
+    popupContainer.style.display = 'none';
+    popup.style.display = 'none';
+})
 
 //copy selected hashtags to clipboard
 const copyBtn = document.getElementById('copy-btn');

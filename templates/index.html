@@ -6,14 +6,15 @@
     <title>LinkedTag</title>
 
     <!-- ICONS -->
-    {% for icon in icons %}
+    <!-- {% for icon in icons %}
     <link rel="preload" href="{{ url_for('static', filename=icon) }}" as="image">
-    {% endfor %}
+    {% endfor %} -->
 
     <!-- STYLE -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
+    <!-- HERO -->
     <section class="hero">
 
         <div class="container title">
@@ -21,6 +22,7 @@
             <h3>Boost your LinkedIn posts reach with top performing hashtags</h3>
         </div>
         
+        <!-- FORM -->
         <div class="container">
             <form id="post-form">
                 <div class="input-wrapper">
@@ -42,6 +44,7 @@
 
     </section>
     
+    <!-- TABLE -->
     <section class="table">
         
         <div class="custom-shape-divider">
@@ -72,6 +75,19 @@
         </div>
 
     </section>
+
+    <!-- NO HASHTAGS FOUND -->
+    <div class="blur-background"></div>
+    
+    <div class="no-hashtag-container">
+        <svg class="x" xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke=""  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-x"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg>
+
+        <svg class="not-found" xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke=""  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-exclamation-circle"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M12 9v4" /><path d="M12 16v.01" /></svg>
+
+        <h3>No Hashtags Found!</h3>
+        <p>This means our system couldn't find matching hashtags for your post. <br>We're always updating our database to help you find the best hashtags for maximum reach!</p>
+    </div>
+    
     
     <!-- SCRIPT -->
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
