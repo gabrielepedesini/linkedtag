@@ -14,7 +14,7 @@
 :root[data-theme="light"] {
     --text: #06080a;
     --background: #fcfcfc;
-    --alt-background: #e6e6e6;
+    --alt-background: #f1f1f1;
     --ter-background: #c0d2e0;
     --primary: #2c5db3;
     --secondary: #4c85e6;
@@ -394,7 +394,7 @@ section.hero {
 }
 
 [data-theme="light"] section.hero {
-    background: radial-gradient(circle, rgba(252,252,252,1) 25%, rgba(218,218,218,1) 100%);
+    background: radial-gradient(circle, rgb(255, 255, 255) 50%, rgb(226, 226, 226) 100%);
 }
 
 [data-theme="dark"] section.hero {
@@ -479,7 +479,7 @@ form.submitted textarea:invalid {
 }
 
 textarea::placeholder {
-    opacity: 0.4;
+    opacity: 0.75;
 }
 
 @media (max-width: 600px) {
