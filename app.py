@@ -18,21 +18,13 @@ df = pd.read_csv('db.csv', usecols=['hashtag', 'followers', 'description', 'embe
 
 # home page
 @app.route('/')
-
 def home():
     icon_folder = os.path.join(app.static_folder, 'img/icons')
     icons = [f'img/icons/{filename}' for filename in os.listdir(icon_folder) if filename.endswith(('png', 'jpg', 'svg'))]
     return render_template('index.html', icons=icons)
 
-# contact page
-@app.route('/contact')
-
-def contact():
-    return render_template('contact.html')
-
 # process to generate the hashtags
 @app.route('/generate-hashtags', methods=['POST'])
-
 def process():
 
     # input
