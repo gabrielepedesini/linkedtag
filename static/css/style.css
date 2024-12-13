@@ -394,7 +394,7 @@ section.hero {
 }
 
 [data-theme="light"] section.hero {
-    background: radial-gradient(circle, #fcfcfc 0%, #d3d3d3 100%);
+    background: radial-gradient(circle, rgba(252,252,252,1) 25%, rgba(218,218,218,1) 100%);
 }
 
 [data-theme="dark"] section.hero {
