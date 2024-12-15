@@ -11,6 +11,15 @@
     font-family: 'Inter', sans-serif;
 }
 
+body {
+    background-color: var(--background);
+    overscroll-behavior: none;
+}
+
+html {
+    overscroll-behavior: none;
+}
+
 :root[data-theme="light"] {
     --text: #06080a;
     --background: #fcfcfc;
@@ -51,10 +60,6 @@
     --scrollbar: #0d141b;
     --scrollthumb: #141e29;
     --scrollthumb-hover: #1c2630;
-}
-
-body {
-    background-color: var(--background);
 }
 
 h1, h2, h3, h4, h5, h6, a, button {
@@ -184,7 +189,7 @@ button.error:hover {
 }
 
 button.rotate-icon img {
-    animation: rotateInfinite 2.5s linear infinite;
+    animation: rotateInfinite 1.5s linear infinite;
 }
 
 @keyframes rotateInfinite {
