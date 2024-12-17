@@ -88,6 +88,8 @@ document.getElementById('post-form').addEventListener('submit', () => {
         const table = document.getElementById('results-table');
         const tbody = table.querySelector('tbody');
         const copyBtn = document.getElementById('copy-btn');
+        const footer = document.querySelector('footer');
+
         tbody.innerHTML = '';
 
         if (data.length > 0) {
@@ -111,6 +113,7 @@ document.getElementById('post-form').addEventListener('submit', () => {
             sectionHero.style.paddingBottom = '300px';
             sectionTable.style.height = `${tableWrapper.offsetHeight}px`;
             shapeDiv.style.display = 'block';
+            footer.style.display = 'flex';
 
             setTimeout(() => {
                 tableWrapper.scrollIntoView({ behavior: 'smooth', block: 'center' }); 
@@ -129,6 +132,7 @@ document.getElementById('post-form').addEventListener('submit', () => {
             sectionHero.style.paddingBottom = '0px';
             sectionTable.style.height = `0px`;
             shapeDiv.style.display = 'none';
+            footer.style.display = 'none';
 
             formBtn.innerHTML = '<img src="../static/img/icons/search.svg" alt=""> Find Hashtags';
             formBtn.classList.remove('rotate-icon');
