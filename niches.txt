@@ -1,9 +1,9 @@
 Technology
-    Artificial Intelligence (#AI)
+    Artificial Intelligence 
     Blockchain
     Cybersecurity
     Cloud Computing
-    Internet of Things (#IoT)
+    Internet of Things
     Software Development
     Fintech
     Machine Learning
