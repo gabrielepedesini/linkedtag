@@ -397,6 +397,12 @@ button.rotate-icon img {
     padding: 50px 25px;
 }
 
+@media (max-width: 768px) {
+    .container {
+        padding: 30px 25px;
+    }
+}
+
 /* HERO */
 
 section.hero {
@@ -419,6 +425,7 @@ section.hero {
 
 .title {
     text-align: center;
+    margin-top: 30px;
 }
 
 .title h1 span {
@@ -428,6 +435,7 @@ section.hero {
 .title h3 {
     opacity: 0.75;
     font-weight: 400;
+    margin-bottom: 25px;
 }
 
 /* INPUTS */
