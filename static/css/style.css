@@ -594,8 +594,24 @@ table td:nth-child(1), table th:nth-child(1) {
     fill: var(--ter-background);
 }
 
-/* NO HASHTAGS FOUND */
 
+/* POPUP */
+.popup {
+    animation: fadeIn 0.3s forwards;
+}
+
+@keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px) translate(-50%, -50%);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0px) translate(-50%, -50%);
+    }
+}
+
+/* NO HASHTAGS FOUND */
 .no-hashtag-container {
     width: 90%;
     max-width: 350px;
