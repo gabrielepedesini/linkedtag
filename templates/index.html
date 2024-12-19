@@ -26,7 +26,7 @@
         <div class="container title">
             <h1>Linked<span>Tag</span></h1>
             <h3>Boost your LinkedIn posts reach with top performing hashtags</h3>
-            <p><a href="">How it works?</a></p>
+            <p><a class="link-how-to-use-it">How to use it?</a></p>
         </div>
         
         <!-- FORM -->
@@ -35,7 +35,7 @@
                 <div class="input-wrapper">
                     <div class="input">
                         <label for="title">Post Title <span>(Optional)</span></label>
-                        <textarea id="title" name="title" rows="1" maxlength="255" placeholder="Insert a short title/summary for a more accurate suggestion"></textarea>
+                        <textarea id="title" name="title" rows="1" maxlength="255" placeholder="Insert a summary or a set of relevant keywords for a more accurate suggestion"></textarea>
                         <div class="char-counter" id="counter-title"></div>
                     </div>
                     <div class="input">
@@ -88,9 +88,54 @@
 
     </section>
 
-    <!-- NO HASHTAGS FOUND -->
     <div class="blur-background"></div>
+
+    <!-- HOW TO USE IT -->
+    <div class="popup how-to-use-it">
+        <svg class="x" xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke=""  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-x"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg>
+
+        <h3>How to use the tool?</h3>
+        <div class="list-element">
+            <div class="bullet">1.</div>
+            <div class="list-content">
+                <span class="item-title">Enter post content and title</span> <br>
+                <span class="item-content">
+                    In the "Post Content" field, enter the full content of your LinkedIn post. The longer and more detailed your content, the better the tool's recommendations.
+                    <br>
+                    In the "Post Title" field, provide a short and relevant summary of your LinkedIn post or a set of relevant keywords. This step is optional but helps the tool make more accurate hashtag suggestions.
+                </span>
+            </div>
+        </div>
+        <div class="list-element">
+            <div class="bullet">2.</div>
+            <div class="list-content">
+                <span class="item-title">Click on "Find Hashtags"</span> <br>
+                <span class="item-content">
+                    The AI will analyze your input and pick a list of top-performing hashtags from out database.
+                </span>
+            </div>
+        </div>
+        <div class="list-element">
+            <div class="bullet">3.</div>
+            <div class="list-content">
+                <span class="item-title">Select desired hashtags</span> <br>
+                <span class="item-content">
+                    Choose the hashtags you want to use by ticking the checkboxes next to them.
+                </span>
+            </div>
+        </div>
+        <div class="list-element">
+            <div class="bullet">4.</div>
+            <div class="list-content">
+                <span class="item-title">Copy selected hashtags</span> <br>
+                <span class="item-content">
+                    Click on the "Copy Selected Hashtags" button to copy the chosen hashtags to your clipboard.
+                </span>
+            </div>
+        </div>
+    </div>
     
+    <!-- NO HASHTAGS FOUND -->
     <div class="popup no-hashtag-container">
         <svg class="x" xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke=""  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-x"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg>
 

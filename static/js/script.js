@@ -44,10 +44,13 @@ form.addEventListener("input", () => {
 
 function adjustTextareaRows() {
     const textarea = document.getElementById("title");
-    if (window.innerWidth < 600) {
+    
+    textarea.setAttribute("rows", "1");
+
+    if (window.innerWidth < 800) {
         textarea.setAttribute("rows", "2");
-    } else {
-        textarea.setAttribute("rows", "1");
+    } if (window.innerWidth < 425) {
+        textarea.setAttribute("rows", "3"); 
     }
 }
 
@@ -157,23 +160,44 @@ document.getElementById('post-form').addEventListener('submit', () => {
 
 //no hashtags found 
 const popupContainer = document.querySelector('.blur-background');
-const popup = document.querySelector('.no-hashtag-container');
-const closePopupBtn = document.querySelector('.no-hashtag-container .x');
+const popupHashtag = document.querySelector('.no-hashtag-container');
+const closePopupHashtagBtn = document.querySelector('.no-hashtag-container .x');
 
 function noHashtagFound() {
     popupContainer.style.display = 'block';
-    popup.style.display = 'flex';
+    popupHashtag.style.display = 'flex';
 }
 
 popupContainer.addEventListener('click', () => {
     popupContainer.style.display = 'none';
-    popup.style.display = 'none';
+    popupHashtag.style.display = 'none';
 })
 
-closePopupBtn.addEventListener('click', () => {
+closePopupHashtagBtn.addEventListener('click', () => {
     popupContainer.style.display = 'none';
-    popup.style.display = 'none';
+    popupHashtag.style.display = 'none';
 })
+
+//how to use it
+const linkHowTo = document.querySelector('.link-how-to-use-it');
+const popupHowTo = document.querySelector('.how-to-use-it');
+const closePopupHowToBtn = document.querySelector('.how-to-use-it .x');
+
+linkHowTo.addEventListener('click', () => {
+    popupContainer.style.display = 'block';
+    popupHowTo.style.display = 'flex';
+})
+
+popupContainer.addEventListener('click', () => {
+    popupContainer.style.display = 'none';
+    popupHowTo.style.display = 'none';
+})
+
+closePopupHowToBtn.addEventListener('click', () => {
+    popupContainer.style.display = 'none';
+    popupHowTo.style.display = 'none';
+})
+
 
 //copy selected hashtags to clipboard
 const copyBtn = document.getElementById('copy-btn');
