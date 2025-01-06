@@ -87,7 +87,7 @@ def process():
             hashtag_embeddings_filtered.append(embedding) 
 
         title_similarities = cosine_similarity([title_embedding], hashtag_embeddings_filtered)[0]
-        filtered_df = filtered_df[title_similarities > 0.25]
+        filtered_df = filtered_df[title_similarities > 0.30]
 
     # get top results
     top_results = filtered_df[['hashtag', 'followers', 'score']].head(10).to_dict(orient='records')
