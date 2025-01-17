@@ -214,14 +214,25 @@ copyBtn.addEventListener('click', () => {
     //copy to clipboard
     navigator.clipboard.writeText(buffer)
         .then(() => {
-            copyBtn.innerHTML = '<img src="../static/img/icons/check.svg" alt=""> Copied!';
+            if (buffer.length !== 0) {
+                copyBtn.innerHTML = '<img src="../static/img/icons/check.svg" alt=""> Copied!';
+    
+                copyBtn.classList.add('correct');
+    
+                setTimeout(() => {
+                    copyBtn.classList.remove('correct');
+                    copyBtn.innerHTML = '<img src="../static/img/icons/copy.svg" alt=""> Copy Selected Hashtags';
+                }, 3000);
+            } else {
+                copyBtn.innerHTML = '<img src="../static/img/icons/x.svg" alt=""> No Hashtag Selected!';
 
-            copyBtn.classList.add('correct');
+                copyBtn.classList.add('error');
 
-            setTimeout(() => {
-                copyBtn.classList.remove('correct');
-                copyBtn.innerHTML = '<img src="../static/img/icons/copy.svg" alt=""> Copy Selected Hashtags';
-            }, 3000);
+                setTimeout(() => {
+                    copyBtn.classList.remove('error');
+                    copyBtn.innerHTML = '<img src="../static/img/icons/copy.svg" alt=""> Copy Selected Hashtags';
+                }, 3000);
+            }
         })
         .catch(err => {
             copyBtn.innerHTML = '<img src="../static/img/icons/x.svg" alt=""> Error!';
