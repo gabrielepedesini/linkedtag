@@ -1,6 +1,6 @@
 # LinkedTag
 
-*LinkedTag* is an AI-powered tool designed to help you pick the best performing hashtags for your LinkedIn posts. By leveraging artificial intelligence, LinkedTag analyzes your content and suggests hashtags that can maximize your post's reach and engagement from a database of top performing ones.
+An AI-powered tool designed to help you pick the best performing hashtags for your LinkedIn posts. By leveraging artificial intelligence, LinkedTag analyzes your content and suggests hashtags that can maximize your post's reach and engagement from a database of top performing ones.
 
 ## Features
 
